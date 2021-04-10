@@ -26,11 +26,23 @@ function Todo() {
     { key: getKey(), text: '明日の準備をする', done: false },
     /* テストコード 終了 */
   ]);
-
+  
+  const addWord = (evt) => {
+      putItems(items => [...items, {key : getKey(), text: newText, done: false}])
+      setNewText("")
+  };
+  
+  const [newText, setNewText] = React.useState("");
+  
   return (
     <div className="panel">
       <div className="panel-heading">
         ITSS ToDoアプリ
+      </div>
+      <div style = {{display: "flex", width: '20%'}}>
+        <input class = "input" type = "text" value={newText} onChange={e => setNewText(e.target
+        .value)}/>
+        <button type = "button" onClick={addWord}>Add</button>
       </div>
       {items.map(item => (
         <TodoItem
