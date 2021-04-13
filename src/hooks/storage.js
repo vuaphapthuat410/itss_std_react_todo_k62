@@ -11,20 +11,27 @@ import { useState, useEffect } from 'react';
 
 const STORAGE_KEY = 'itss-todo';
 
-function useStorage() {
-  const [items, setItems] = useState([]);
+function useStorage(input) {
+  const [items, setItems] = useState(input);
 　
 　/* 副作用を使う */
   useEffect(() => {
-    
+    const todos = window.localStorage.getItem(STORAGE_KEY);
+    if(!todos) {
+      console.log("Empty local storage.");
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(input));
+    }
+    else
+      setItems(JSON.parse(todos));
   }, []);
 
   const putItems = items => {
-    
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    setItems(items)
   };
 
   const clearItems = () => {
-    
+    window.localStorage.clear();
   };
 
   return [items, putItems, clearItems];
