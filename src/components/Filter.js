@@ -10,9 +10,9 @@ import TodoItem from './TodoItem';
 　・タブで表示する
 　・サポートするステータスは「すべて」「未完了」「完了済み」
 */
-function Filter({items}, {updateStatus}) {
+function Filter(props) {
   /* save number of item when items changed*/
-  const [quantity, setQuantity] = useState(items.length);
+  const [quantity, setQuantity] = useState(props.items.length);
   
   /* show item list based on conditions , this make me so confused why if there doesn't have this one, 
   if u bring all the below code to where this function called, and yes the containers changes but it behaves abnormally
@@ -25,7 +25,7 @@ function Filter({items}, {updateStatus}) {
         {arr.map((item) => (
           <TodoItem
             item = {item}
-            onComplete = {updateStatus}
+            onComplete = {props.updateStatus}
           />
         ))}
       </div>
@@ -41,13 +41,13 @@ function Filter({items}, {updateStatus}) {
           <Tab>完了済み</Tab>
         </TabList>
           <TabPanel>
-            <ShowList arr = {items} /> 
+            <ShowList arr = {props.items} /> 
           </TabPanel>
           <TabPanel>
-            <ShowList arr = {items.filter(item => item.done == false)} /> 
+            <ShowList arr = {props.items.filter(item => item.done == false)} /> 
           </TabPanel>
           <TabPanel>
-            <ShowList arr = {items.filter(item => item.done == true)} /> 
+            <ShowList arr = {props.items.filter(item => item.done == true)} /> 
           </TabPanel>
       </Tabs>
       

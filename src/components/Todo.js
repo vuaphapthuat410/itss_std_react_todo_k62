@@ -52,7 +52,7 @@ function Todo() {
       
       <Filter items = {items} updateStatus = {updateStatus} />
       
-      <button style = {{display: "centre", width: "20%" }}>全てのToDoを削除</button>
+      <button style = {{display: "centre", width: "20%" }} onClick={clearItems}>全てのToDoを削除</button>
     </div>
   );
 }
